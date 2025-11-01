@@ -1,0 +1,5 @@
+pytorch-lightning
+torch
+numpy
+pandas
+PyYAML
