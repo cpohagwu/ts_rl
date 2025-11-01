@@ -1,0 +1,4 @@
+*.parquet
+runs/
+__pycache__/
+*.pyc

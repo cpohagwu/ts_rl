@@ -1,0 +1,14 @@
+seed: 42
+
+data:
+  parquet_path: "path/to/data.parquet"
+  lookback: 32
+  features: null        # if null, inferred as all non-control columns
+  target_columns: null  # if null, same as features
+
+eval:
+  batch_size: 512
+
+checkpoint:
+  path: "path/to/best.ckpt"
+

@@ -1,0 +1,41 @@
+seed: 42
+
+data:
+  parquet_path: "train.parquet"
+  lookback: 100
+  normalize: true
+  features: null        # null -> all
+  target_columns: null  # null -> same as features
+  train_val_split: 0.8
+  batch_size: 800
+  num_workers: 0
+
+model:
+  hidden_sizes: [256, 128]
+  dropout_rate: 0.2
+
+algo:
+  learning_rate: 1.0e-3
+  l2_reg: 0.0
+  baseline_decay: 0.95
+  reward_scale_method: "exp"   # exp|tanh|linear
+  normalize_advantage: true
+  clip_grad_norm: 1.0
+  accumulate_batches: 1
+
+trainer:
+  max_epochs: 1000
+  accelerator: cpu     # set to 'cpu' for 8-core CPU DDP; use 'gpu' if available
+  devices: 1           # number of CPU processes; set to your core count
+  strategy: auto  # Windows/CPU-friendly DDP; use 'ddp' on Linux
+  precision: 32
+
+checkpoint:
+  save_top_k: 3        # best-k checkpoints to keep
+  every_n_epochs: 1    # save frequency in epochs
+  monitor: "val/r2_avg"  # metric to monitor (maximize)
+  mode: max
+
+logging:
+  save_dir: "runs"
+  name: "ts_rl_rwr"
